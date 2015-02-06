@@ -57,4 +57,9 @@ public class MyMovie {
 		
 		return this.reviews;
 	}
+	
+	@Override
+	public String toString(){
+		return movie.title;
+	}
 }
