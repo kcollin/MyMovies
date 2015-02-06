@@ -35,18 +35,20 @@ public class TestsMainViewController {
 	
 	@Test
 	public void getBoxOfficeMovies_getsMovies() {
-		MainViewController controller = new MainViewController(new MockFileMediator(), new MockWebMediator());
-		ArrayList<MyMovie> boxOfficeMovies = controller.getBoxOfficeMovies();
-		assertEquals(1, boxOfficeMovies.size());
+		MockWebMediator mockWebMediator = new MockWebMediator();
+		MainViewController controller = new MainViewController(new MockFileMediator(), mockWebMediator);
+		controller.getBoxOfficeMovies();
+		assertTrue(mockWebMediator.getBoxOfficeMoviesIsCalled);
 	}
 	
 	class MockWebMediator implements WebMediatorInterface{
-
+		
+		boolean getBoxOfficeMoviesIsCalled;
+		
 		@Override
 		public ArrayList<MyMovie> getBoxOfficeMovies(int limit) {
-			ArrayList<MyMovie> movies = new ArrayList<MyMovie>();
-			movies.add(new MyMovie(new Movie()));
-			return movies;
+			getBoxOfficeMoviesIsCalled = true;
+			return new ArrayList<MyMovie>();
 		}
 
 		@Override
